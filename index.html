@@ -326,12 +326,26 @@ function applyNowRow(p,on){
   te.style.backgroundColor=on?'#ffffff':TC_BG;te.style.color=on?'#1060d0':TC_C;te.style.fontWeight=on?'900':'700';
 }
 
-// 教室番号 → 号館ID
 function getRoomBldId(room){
   if(!room)return null;
-  if(/12[号館]|12号/.test(room))return '12';
-  const m=room.match(/^(\d{1,2})\d{2,3}/);
-  return m?m[1]:null;
+
+  room = room.replace(/\n/g,'').trim();
+
+  // 特殊建物
+  if(room.includes('体育館')) return 'gym';
+  if(room.includes('図書館')) return 'lib';
+  if(room.includes('食堂'))   return 'shk';
+  if(room.includes('学生寮')) return '0';
+
+  // 「12号館」「12号3階」対応
+  const g = room.match(/(\d{1,2})号/);
+  if(g) return g[1];
+
+  // 「5203」「8108」等
+  const m = room.match(/^(\d{1,2})\d{2,3}/);
+  if(m) return m[1];
+
+  return null;
 }
 
 // マップラベル更新
