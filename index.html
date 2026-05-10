@@ -357,21 +357,26 @@ function updateMap(nowRoom, nxtRoom) {
   ALL_BLDS.forEach(id => {
     const bg = document.getElementById('bg-' + id);
     const txt = document.getElementById('txt-' + id);
+  
     if (!bg || !txt) return;
-
-    // 一旦すべてリセット
-    bg.className.baseVal = ""; 
-    bg.setAttribute('fill', 'rgba(255,255,255,0.75)');
-    bg.setAttribute('stroke', 'none');
-    bg.removeAttribute('style'); // インラインスタイルをクリア
-    txt.setAttribute('class', 'bld-label');
-
+  
+    // リセット
+    bg.setAttribute('class','');
+    txt.setAttribute('class','bld-label');
+  
+    bg.setAttribute('fill','rgba(255,255,255,0.75)');
+    bg.setAttribute('stroke','none');
+  
+    // NOW
     if (nowId === id) {
-      bg.setAttribute('class', 'label-now-bg');
-      txt.setAttribute('class', 'bld-label label-now-txt');
-    } else if (nxtId === id && nxtId !== nowId) {
-      bg.setAttribute('class', 'label-nxt-bg');
-      txt.setAttribute('class', 'bld-label label-nxt-txt');
+      bg.setAttribute('class','label-now-bg');
+      txt.setAttribute('class','bld-label label-now-txt');
+    }
+  
+    // NEXT
+    else if (nxtId === id && nxtId !== nowId) {
+      bg.setAttribute('class','label-nxt-bg');
+      txt.setAttribute('class','bld-label label-nxt-txt');
     }
   });
 
