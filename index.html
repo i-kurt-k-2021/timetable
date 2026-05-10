@@ -29,18 +29,16 @@ table{border-collapse:collapse;width:100%;table-layout:fixed}
 th{background:#1c2128;color:#ffffff;font-size:0.88rem;font-weight:700;letter-spacing:0.1em;text-align:center;padding:3px 2px;border:1px solid #3a4250;height:24px;white-space:nowrap}
 th.today-col{background:#ffffff!important;color:#1060d0!important;font-weight:900;animation:none!important}
 
-/* 行の高さを38px→30pxに縮小 */
 td.pc{background:#161b22;font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#8b949e;text-align:center;border:1px solid #3a4250;padding:0;height:30px;font-weight:700;vertical-align:middle}
 td.tc{background:#1c2128;font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#c0c8d4;text-align:center;border:1px solid #3a4250;padding:1px;height:30px;line-height:1.2;white-space:nowrap;font-weight:700;vertical-align:middle}
 .next-row{color:rgba(255,255,255,0.85)!important;font-weight:700!important}
 
 td.cc{position:relative;text-align:center;vertical-align:middle;border:1px solid #3a4250;padding:2px;height:30px;overflow:hidden}
 td.cc.empty{background:#252d38}
-
 .cn{font-weight:700;line-height:1.15;font-size:0.55rem;color:#000!important;display:block}
-.cr{font-size:0.52rem;margin-top:1px;font-family:'Noto Sans JP',sans-serif;color:#fff!important;font-weight:700;display:block}
+.cr{font-size:0.52rem;margin-top:1px;color:#fff!important;font-weight:700;display:block}
 
-.c-green {background:#92d050}.c-cyan{background:#00b0f0}.c-orange{background:#ffc000}
+.c-green{background:#92d050}.c-cyan{background:#00b0f0}.c-orange{background:#ffc000}
 .c-purple{background:#cc99ff}.c-pink{background:#ff99cc}.c-lblue{background:#9bc2e6}
 .c-yellow{background:#ffc000}.c-club{background:#ffffff}
 
@@ -49,10 +47,8 @@ td.cc.empty{background:#252d38}
 td.cc.active{animation:aglow 1.2s ease-in-out infinite;filter:brightness(1.3) saturate(1.4);z-index:2}
 td.cc.active .cn{animation:blink 1.2s ease-in-out infinite}
 td.cc.active::after{content:'▶NOW';position:absolute;top:1px;right:1px;font-family:'Share Tech Mono',monospace;font-size:0.38rem;color:#fff;background:rgba(0,0,0,0.6);padding:1px 2px;border-radius:2px;animation:blink 1.2s ease-in-out infinite}
-
 td.cc.next-class{filter:brightness(1.15) saturate(1.2);z-index:1;outline:3px solid #fff;outline-offset:-3px}
 td.cc.next-class::after{content:'NEXT';position:absolute;top:1px;right:1px;font-family:'Share Tech Mono',monospace;font-size:0.38rem;color:#fff;background:rgba(0,0,0,0.6);padding:1px 2px;border-radius:2px}
-
 td.cc.past::before{content:'';position:absolute;inset:0;background:rgba(13,17,23,0.72);z-index:1;pointer-events:none}
 td.cc.past .cn{position:relative;z-index:2;color:#d1d5da!important}
 td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
@@ -71,30 +67,47 @@ td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
 /* ══ マップ ══ */
 #campus-map-section{margin-top:8px;border-radius:8px;border:1px solid #3a4250;overflow:hidden;background:#161b22}
 .map-header{padding:5px 10px;background:#1c2128;border-bottom:1px solid #3a4250;font-size:0.7rem;font-weight:700;color:#58a6ff;letter-spacing:0.1em}
-.map-container{position:relative;width:100%;user-select:none}
-.map-container img{width:100%;display:block}
-.map-container svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.map-wrap{position:relative;width:100%;line-height:0}
+.map-wrap img{width:100%;display:block}
+.map-wrap svg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible}
 
-/* NOW: 青い点滅枠（時間割のactiveと同じスタイル） */
-@keyframes map-now-glow{
-  0%,100%{stroke:#58a6ff;stroke-width:5;fill:rgba(88,166,255,0.2);filter:drop-shadow(0 0 6px #58a6ff)}
-  50%    {stroke:#fff;   stroke-width:7;fill:rgba(88,166,255,0.4);filter:drop-shadow(0 0 14px #58a6ff)}
+/* ラベルの基本スタイル */
+.bld-label{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:9px;
+  font-weight:900;
+  fill:#333;
+  text-anchor:middle;
+  dominant-baseline:middle;
+  pointer-events:none;
 }
-/* NEXT: 白い実線枠（時間割のnext-classと同じスタイル） */
-@keyframes map-nxt-solid{
-  0%,100%{stroke:#ffffff;stroke-width:4;fill:rgba(255,255,255,0.08)}
-  50%    {stroke:#ffffff;stroke-width:4;fill:rgba(255,255,255,0.18)}
+.bld-bg{
+  fill:rgba(255,255,255,0.75);
+  rx:3;
 }
-@keyframes map-lbl-now{0%,100%{fill:#58a6ff;opacity:1}50%{fill:#fff;opacity:0.8}}
-@keyframes map-lbl-nxt{0%,100%{fill:#ffffff;opacity:1}50%{fill:#ccddff;opacity:0.7}}
 
-.map-bld-now{animation:map-now-glow 1.2s ease-in-out infinite}
-.map-bld-nxt{animation:map-nxt-solid 1.5s ease-in-out infinite}
-.map-lbl-now{animation:map-lbl-now 1.2s ease-in-out infinite}
-.map-lbl-nxt{animation:map-lbl-nxt 1.5s ease-in-out infinite}
+/* NOW: 青い点滅ラベル枠 */
+@keyframes now-label-glow{
+  0%,100%{fill:rgba(88,166,255,0.95);stroke:#58a6ff;stroke-width:1.5;filter:drop-shadow(0 0 4px #58a6ff)}
+  50%    {fill:rgba(30,100,220,0.85); stroke:#fff;   stroke-width:2;  filter:drop-shadow(0 0 8px #58a6ff)}
+}
+@keyframes now-text-blink{
+  0%,100%{fill:#fff;opacity:1}
+  50%    {fill:#cce4ff;opacity:0.85}
+}
+@keyframes next-label-solid{
+  0%,100%{fill:rgba(255,255,255,0.92);stroke:#fff;stroke-width:1.5}
+  50%    {fill:rgba(220,220,220,0.8); stroke:#ddd;stroke-width:1.5}
+}
+
+.label-now-bg { animation: now-label-glow  1.2s ease-in-out infinite; rx:3; }
+.label-nxt-bg { animation: next-label-solid 1.5s ease-in-out infinite; rx:3; fill:rgba(255,255,255,0.9); stroke:#fff; stroke-width:1.5; }
+.label-now-txt{ animation: now-text-blink   1.2s ease-in-out infinite; font-weight:900!important; }
+.label-nxt-txt{ fill:#111; font-weight:900!important; }
 
 .map-legend{padding:5px 10px;font-size:0.62rem;color:#8b949e;display:flex;gap:12px;flex-wrap:wrap;background:#1c2128;border-top:1px solid #3a4250}
-.leg-dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.leg-now{display:inline-block;width:28px;height:11px;background:rgba(88,166,255,0.9);border-radius:2px;border:1px solid #58a6ff;margin-right:4px;vertical-align:middle}
+.leg-nxt{display:inline-block;width:28px;height:11px;background:rgba(255,255,255,0.9);border-radius:2px;border:1px solid #fff;margin-right:4px;vertical-align:middle}
 
 footer{text-align:center;margin-top:8px;font-size:0.56rem;color:#3d444d;letter-spacing:0.1em}
 </style>
@@ -128,34 +141,86 @@ footer{text-align:center;margin-top:8px;font-size:0.56rem;color:#3d444d;letter-s
 <!-- ══ キャンパスマップ ══ -->
 <div id="campus-map-section">
   <div class="map-header">📍 キャンパスマップ</div>
-  <div class="map-container">
-    <img src="map.png" alt="キャンパスマップ">
-    <svg viewBox="0 0 1320 870">
-      <!-- NOW/NEXT ハイライト枠 -->
-      <rect id="bld-1"  x="578" y="468" width="100" height="95"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-2"  x="510" y="375" width="105" height="95"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-3"  x="435" y="418" width="105" height="85"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-5"  x="610" y="325" width="110" height="95"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-7"  x="748" y="178" width="110" height="85"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-8"  x="828" y="235" width="145" height="110" rx="5" fill="none" stroke="none"/>
-      <rect id="bld-9"  x="448" y="255" width="110" height="95"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-11" x="298" y="455" width="120" height="95"  rx="5" fill="none" stroke="none"/>
-      <rect id="bld-12" x="708" y="425" width="145" height="170" rx="5" fill="none" stroke="none"/>
-      <!-- ラベル（光る文字） -->
-      <text id="lbl-1"  x="628" y="523" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">1号館</text>
-      <text id="lbl-2"  x="562" y="430" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">2号館</text>
-      <text id="lbl-3"  x="487" y="468" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">3号館</text>
-      <text id="lbl-5"  x="665" y="380" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">5号館</text>
-      <text id="lbl-7"  x="803" y="228" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">7号館</text>
-      <text id="lbl-8"  x="900" y="298" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">8号館</text>
-      <text id="lbl-9"  x="503" y="308" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">9号館</text>
-      <text id="lbl-11" x="358" y="508" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">11号館</text>
-      <text id="lbl-12" x="780" y="518" text-anchor="middle" font-size="20" font-weight="900" fill="none" font-family="sans-serif">12号館</text>
+  <div class="map-wrap">
+    <img src="map2.jpg" alt="キャンパスマップ">
+    <!--
+      SVG viewBox = 800×480 (JPG解像度に合わせる)
+      各建物ラベルの座標は map.png の建物名位置から推定
+      bg rect は text より先に描画（z-order）
+    -->
+    <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+      <!-- 建物ごとに <g> でまとめる: bg(rect) + text -->
+
+      <!-- 学生寮 -->
+      <g id="bld-0">
+        <rect id="bg-0"  x="58"  y="148" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-0" x="76"  y="156" class="bld-label">学生寮</text>
+      </g>
+      <!-- 体育館 -->
+      <g id="bld-gym">
+        <rect id="bg-gym"  x="152" y="216" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-gym" x="170" y="224" class="bld-label">体育館</text>
+      </g>
+      <!-- 9号館 -->
+      <g id="bld-9">
+        <rect id="bg-9"  x="264" y="200" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-9" x="282" y="208" class="bld-label">9号館</text>
+      </g>
+      <!-- 7号館 -->
+      <g id="bld-7">
+        <rect id="bg-7"  x="480" y="148" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-7" x="498" y="156" class="bld-label">7号館</text>
+      </g>
+      <!-- 8号館 -->
+      <g id="bld-8">
+        <rect id="bg-8"  x="570" y="190" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-8" x="588" y="198" class="bld-label">8号館</text>
+      </g>
+      <!-- 食堂棟 -->
+      <g id="bld-shk">
+        <rect id="bg-shk"  x="700" y="232" width="42" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-shk" x="721" y="240" class="bld-label">食堂棟</text>
+      </g>
+      <!-- 図書館 -->
+      <g id="bld-lib">
+        <rect id="bg-lib"  x="240" y="256" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-lib" x="258" y="264" class="bld-label">図書館</text>
+      </g>
+      <!-- 2号館 -->
+      <g id="bld-2">
+        <rect id="bg-2"  x="330" y="272" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-2" x="348" y="280" class="bld-label">2号館</text>
+      </g>
+      <!-- 5号館 -->
+      <g id="bld-5">
+        <rect id="bg-5"  x="436" y="248" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-5" x="454" y="256" class="bld-label">5号館</text>
+      </g>
+      <!-- 3号館 -->
+      <g id="bld-3">
+        <rect id="bg-3"  x="298" y="318" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-3" x="316" y="326" class="bld-label">3号館</text>
+      </g>
+      <!-- 1号館 -->
+      <g id="bld-1">
+        <rect id="bg-1"  x="386" y="338" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-1" x="404" y="346" class="bld-label">1号館</text>
+      </g>
+      <!-- 11号館 -->
+      <g id="bld-11">
+        <rect id="bg-11"  x="148" y="376" width="42" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-11" x="169" y="384" class="bld-label">11号館</text>
+      </g>
+      <!-- 12号館 -->
+      <g id="bld-12">
+        <rect id="bg-12"  x="530" y="356" width="42" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-12" x="551" y="364" class="bld-label">12号館</text>
+      </g>
     </svg>
   </div>
   <div class="map-legend">
-    <span id="legend-now" style="display:none"><span class="leg-dot" style="background:#58a6ff;box-shadow:0 0 4px #58a6ff"></span>現在の授業（NOW）</span>
-    <span id="legend-nxt" style="display:none"><span class="leg-dot" style="border:2px solid #fff;background:rgba(255,255,255,0.1)"></span>次の授業（NEXT）</span>
+    <span id="legend-now" style="display:none"><span class="leg-now"></span>現在の授業（NOW）</span>
+    <span id="legend-nxt" style="display:none"><span class="leg-nxt"></span>次の授業（NEXT）</span>
     <span id="legend-none">授業時間外</span>
   </div>
 </div>
@@ -190,8 +255,7 @@ const SCH={
 const DAYS=[1,2,3,4,5];
 const WFULL=['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
 const PC=10;
-const PC_DEFAULT_BG='#161b22',TC_DEFAULT_BG='#1c2128';
-const PC_DEFAULT_COLOR='#8b949e',TC_DEFAULT_COLOR='#c0c8d4';
+const PC_BG='#161b22',TC_BG='#1c2128',PC_C='#8b949e',TC_C='#c0c8d4';
 
 function toMin(h,m){return h*60+m}
 function fmt2(n){return String(n).padStart(2,'0')}
@@ -201,8 +265,7 @@ function getNext(di,nm){const d=SCH[di]||{};let best=null;for(const k in d){cons
 function isPast(ep,nm){const[,,eh,em]=P[ep];return nm>toMin(eh,em)}
 
 function buildTable(){
-  const tbody=document.getElementById('tbody');
-  tbody.innerHTML='';
+  const tbody=document.getElementById('tbody');tbody.innerHTML='';
   const skip={1:{},2:{},3:{},4:{},5:{}};
   for(let p=1;p<=PC;p++){
     const tr=document.createElement('tr');
@@ -218,9 +281,7 @@ function buildTable(){
         td.classList.add(cell.color);
         const ne=document.createElement('span');ne.className='cn';ne.innerHTML=cell.name.replace(/\n/g,'<br>');td.appendChild(ne);
         if(cell.room){const re=document.createElement('span');re.className='cr';re.innerHTML=cell.room.replace(/\n/g,'<br>');td.appendChild(re);}
-      } else {
-        td.classList.add('empty');td.dataset.ep=p;
-      }
+      } else {td.classList.add('empty');td.dataset.ep=p;}
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
@@ -230,44 +291,41 @@ function buildTable(){
 function applyNowRow(p,on){
   const pe=document.getElementById('fp-'+p),te=document.getElementById('ft-'+p);
   if(!pe||!te)return;
-  pe.style.backgroundColor=on?'#ffffff':PC_DEFAULT_BG;
-  pe.style.color=on?'#1060d0':PC_DEFAULT_COLOR;
-  pe.style.fontWeight=on?'900':'700';
-  te.style.backgroundColor=on?'#ffffff':TC_DEFAULT_BG;
-  te.style.color=on?'#1060d0':TC_DEFAULT_COLOR;
-  te.style.fontWeight=on?'900':'700';
+  pe.style.backgroundColor=on?'#ffffff':PC_BG;pe.style.color=on?'#1060d0':PC_C;pe.style.fontWeight=on?'900':'700';
+  te.style.backgroundColor=on?'#ffffff':TC_BG;te.style.color=on?'#1060d0':TC_C;te.style.fontWeight=on?'900':'700';
 }
 
-// 教室番号 → 号館番号
-function getRoomBuilding(room){
+// 教室番号 → 号館ID
+function getRoomBldId(room){
   if(!room)return null;
-  if(/12[号館]|12号/.test(room))return 12;
+  if(/12[号館]|12号/.test(room))return '12';
   const m=room.match(/^(\d{1,2})\d{2,3}/);
-  if(m)return parseInt(m[1]);
-  return null;
+  return m?m[1]:null;
 }
 
-// マップ更新
+// マップラベル更新
+const ALL_BLDS=['0','gym','1','2','3','5','7','8','9','11','12','lib','shk'];
 function updateMap(nowRoom,nxtRoom){
-  const nowBld=getRoomBuilding(nowRoom);
-  const nxtBld=getRoomBuilding(nxtRoom);
-  [1,2,3,5,7,8,9,11,12].forEach(n=>{
-    const rect=document.getElementById('bld-'+n);
-    const lbl=document.getElementById('lbl-'+n);
-    if(!rect||!lbl)return;
-    rect.removeAttribute('class');rect.setAttribute('fill','none');rect.setAttribute('stroke','none');rect.setAttribute('stroke-width','0');
-    lbl.removeAttribute('class');lbl.setAttribute('fill','none');
-    if(nowBld===n){
-      rect.setAttribute('class','map-bld-now');
-      lbl.setAttribute('class','map-lbl-now');
-    } else if(nxtBld===n&&nxtBld!==nowBld){
-      rect.setAttribute('class','map-bld-nxt');
-      lbl.setAttribute('class','map-lbl-nxt');
+  const nowId=getRoomBldId(nowRoom);
+  const nxtId=getRoomBldId(nxtRoom);
+  ALL_BLDS.forEach(id=>{
+    const bg=document.getElementById('bg-'+id);
+    const txt=document.getElementById('txt-'+id);
+    if(!bg||!txt)return;
+    // リセット
+    bg.removeAttribute('class');bg.setAttribute('fill','rgba(255,255,255,0.75)');bg.setAttribute('stroke','none');bg.setAttribute('stroke-width','0');
+    txt.removeAttribute('class');txt.setAttribute('class','bld-label');
+    if(nowId&&nowId===id){
+      bg.setAttribute('class','label-now-bg');
+      txt.setAttribute('class','bld-label label-now-txt');
+    } else if(nxtId&&nxtId===id&&nxtId!==nowId){
+      bg.setAttribute('class','label-nxt-bg');
+      txt.setAttribute('class','bld-label label-nxt-txt');
     }
   });
-  document.getElementById('legend-now').style.display=nowBld?'inline':'none';
-  document.getElementById('legend-nxt').style.display=(nxtBld&&nxtBld!==nowBld)?'inline':'none';
-  document.getElementById('legend-none').style.display=(!nowBld&&!nxtBld)?'inline':'none';
+  document.getElementById('legend-now').style.display=nowId?'inline':'none';
+  document.getElementById('legend-nxt').style.display=(nxtId&&nxtId!==nowId)?'inline':'none';
+  document.getElementById('legend-none').style.display=(!nowId&&!nxtId)?'inline':'none';
 }
 
 let prevP=null;
@@ -286,7 +344,6 @@ function update(){
     :'授業時間外';
 
   DAYS.forEach(d=>{const th=document.getElementById('th-'+d);if(th)th.classList.toggle('today-col',d===todayDi);});
-
   if(prevP!==null){applyNowRow(prevP,false);prevP=null;}
   document.querySelectorAll('.next-row').forEach(el=>el.classList.remove('next-row'));
 
