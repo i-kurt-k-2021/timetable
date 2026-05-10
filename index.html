@@ -86,28 +86,63 @@ td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
   rx:3;
 }
 
-/* NOW: 水色で点滅 */
-@keyframes now-label-glow {
-  0%,100% { fill: #58a6ff; stroke: #58a6ff; stroke-width: 2; filter: drop-shadow(0 0 4px #58a6ff); }
-  50%     { fill: rgba(88,166,255,0.4); stroke: #fff; stroke-width: 2.5; filter: drop-shadow(0 0 8px #58a6ff); }
+/* NOW: 青く点滅 */
+@keyframes now-label-glow{
+  0%,100%{fill:rgba(88,166,255,0.95);stroke:#58a6ff;stroke-width:2;filter:drop-shadow(0 0 4px #58a6ff)}
+  50%    {fill:rgba(88,166,255,0.4); stroke:#fff;   stroke-width:2.5;filter:drop-shadow(0 0 10px #58a6ff)}
+}
+@keyframes now-text-blink{
+  0%,100%{fill:#fff;opacity:1}
+  50%    {fill:#cce4ff;opacity:0.8}
+}
+/* NEXT: 水色太枠 */
+@keyframes next-label-glow{
+  0%,100%{
+    fill:rgba(88,166,255,0.18);
+    stroke:#58a6ff;
+    stroke-width:4;
+    filter:drop-shadow(0 0 6px #58a6ff)
+  }
+  50%{
+    fill:rgba(88,166,255,0.08);
+    stroke:#58a6ff;
+    stroke-width:4;
+    filter:drop-shadow(0 0 12px #58a6ff)
+  }
+}
+@keyframes next-text-blink{
+  0%,100%{fill:#ffffff;opacity:1}
+  50%{fill:#cce4ff;opacity:1}
 }
 
-/* NEXT: 水色で太枠（点滅なし） */
-.label-nxt-bg { 
-  fill: rgba(88,166,255,0.75); 
-  stroke: #58a6ff; 
-  stroke-width: 2.5; 
-  filter: drop-shadow(0 0 4px rgba(88,166,255,0.5)); 
-  rx: 3; 
+.label-now-bg {animation:now-label-glow  1.2s ease-in-out infinite;rx:3}
+.label-now-txt{animation:now-text-blink  1.2s ease-in-out infinite;font-weight:900!important}
+
+.label-nxt-bg{
+  fill:rgba(88,166,255,0.15);
+  stroke:#58a6ff;
+  stroke-width:4;
+  filter:drop-shadow(0 0 8px #58a6ff);
+  rx:3;
 }
 
-.label-now-bg { animation: now-label-glow 1.2s ease-in-out infinite; rx: 3; }
-.label-now-txt { animation: now-text-blink 1.2s ease-in-out infinite; font-weight: 900 !important; }
-.label-nxt-txt { fill: #fff; font-weight: 900 !important; }
+.label-nxt-txt{
+  fill:#ffffff;
+  font-weight:900!important;
+}
 
 .map-legend{padding:5px 10px;font-size:0.62rem;color:#8b949e;display:flex;gap:12px;flex-wrap:wrap;background:#1c2128;border-top:1px solid #3a4250}
 .leg-now{display:inline-block;width:28px;height:11px;background:rgba(88,166,255,0.9);border-radius:2px;border:1px solid #58a6ff;margin-right:4px;vertical-align:middle}
-.leg-nxt{display:inline-block;width:28px;height:11px;background:rgba(88,166,255,0.75);border-radius:2px;border:1px solid #58a6ff;margin-right:4px;vertical-align:middle}
+.leg-nxt{
+  display:inline-block;
+  width:28px;
+  height:11px;
+  background:rgba(88,166,255,0.25);
+  border-radius:2px;
+  border:2px solid #58a6ff;
+  margin-right:4px;
+  vertical-align:middle
+}
 
 
 footer{text-align:center;margin-top:8px;font-size:0.56rem;color:#3d444d;letter-spacing:0.1em}
@@ -141,7 +176,6 @@ footer{text-align:center;margin-top:8px;font-size:0.56rem;color:#3d444d;letter-s
 
 <!-- ══ キャンパスマップ ══ -->
 <div id="campus-map-section">
-  <div class="map-header">📍 キャンパスマップ</div>
   <div class="map-wrap">
     <img src="map3.jpg" alt="キャンパスマップ" style="width:100%;height:auto;display:block">
     <svg viewBox="0 0 800 480" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
@@ -150,8 +184,8 @@ footer{text-align:center;margin-top:8px;font-size:0.56rem;color:#3d444d;letter-s
 
       <!-- 学生寮 -->
       <g id="bld-0">
-        <rect id="bg-0"  x="33"  y="58" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
-        <text id="txt-0" x="51"  y="68" class="bld-label">学生寮</text>
+        <rect id="bg-0"  x="30"  y="53" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-0" x="48"  y="63" class="bld-label">学生寮</text>
       </g>
       <!-- 体育館 -->
       <g id="bld-gym">
