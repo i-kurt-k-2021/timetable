@@ -322,5 +322,125 @@ buildTable();
 update();
 setInterval(update, 1000);
 </script>
-</body>
+
 </html>
+
+<!-- ══ キャンパスマップ ══ -->
+<div id="campus-map-section" style="margin-top:12px;border-radius:8px;border:1px solid #3a4250;overflow:hidden;background:#161b22;">
+  <div style="padding:6px 10px;background:#1c2128;border-bottom:1px solid #3a4250;font-size:0.7rem;font-weight:700;color:#58a6ff;letter-spacing:0.1em;">
+    📍 キャンパスマップ
+  </div>
+  <div style="position:relative;width:100%;user-select:none;">
+    <img id="campus-img" src="map.png" style="width:100%;display:block;" alt="キャンパスマップ">
+    <svg id="campus-svg" viewBox="0 0 1320 870" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+      <!-- 各号館のハイライト領域 (x,y,w,h はマップ画像上の座標) -->
+      <!-- 1号館 --> <rect id="bld-1"  x="588" y="480" width="90"  height="90"  rx="6" fill="none" stroke="none"/>
+      <!-- 2号館 --> <rect id="bld-2"  x="530" y="390" width="90"  height="90"  rx="6" fill="none" stroke="none"/>
+      <!-- 3号館 --> <rect id="bld-3"  x="450" y="430" width="90"  height="80"  rx="6" fill="none" stroke="none"/>
+      <!-- 5号館 --> <rect id="bld-5"  x="620" y="340" width="100" height="90"  rx="6" fill="none" stroke="none"/>
+      <!-- 7号館 --> <rect id="bld-7"  x="760" y="190" width="100" height="80"  rx="6" fill="none" stroke="none"/>
+      <!-- 8号館 --> <rect id="bld-8"  x="840" y="250" width="130" height="100" rx="6" fill="none" stroke="none"/>
+      <!-- 9号館 --> <rect id="bld-9"  x="460" y="270" width="100" height="90"  rx="6" fill="none" stroke="none"/>
+      <!-- 11号館--> <rect id="bld-11" x="310" y="470" width="110" height="90"  rx="6" fill="none" stroke="none"/>
+      <!-- 12号館--> <rect id="bld-12" x="720" y="440" width="130" height="160" rx="6" fill="none" stroke="none"/>
+      <!-- ラベル -->
+      <text id="lbl-1"  x="633" y="535" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">1号館</text>
+      <text id="lbl-2"  x="575" y="445" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">2号館</text>
+      <text id="lbl-3"  x="495" y="480" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">3号館</text>
+      <text id="lbl-5"  x="670" y="395" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">5号館</text>
+      <text id="lbl-7"  x="810" y="240" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">7号館</text>
+      <text id="lbl-8"  x="905" y="310" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">8号館</text>
+      <text id="lbl-9"  x="510" y="320" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">9号館</text>
+      <text id="lbl-11" x="365" y="520" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">11号館</text>
+      <text id="lbl-12" x="785" y="530" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">12号館</text>
+    </svg>
+  </div>
+  <!-- 凡例 -->
+  <div id="map-legend" style="padding:6px 10px;font-size:0.65rem;color:#8b949e;display:flex;gap:12px;flex-wrap:wrap;background:#1c2128;border-top:1px solid #3a4250;">
+    <span id="legend-now" style="display:none"><span style="display:inline-block;width:10px;height:10px;background:#58a6ff;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>現在の授業</span>
+    <span id="legend-nxt" style="display:none"><span style="display:inline-block;width:10px;height:10px;background:#f0b429;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>次の授業</span>
+    <span id="legend-none" style="color:#555;">授業時間外</span>
+  </div>
+</div>
+
+<script>
+// ── 教室番号 → 号館番号 ──
+function getRoomBuilding(room) {
+  if (!room) return null;
+  // "12号3階" や "12号5階" → 12
+  const m12 = room.match(/12[号]/);
+  if (m12) return 12;
+  // "8108" → 8, "5207" → 5 など（先頭1〜2桁）
+  const m4 = room.match(/^(\d{1,2})\d{2,3}/);
+  if (m4) return parseInt(m4[1]);
+  return null;
+}
+
+// ── アニメーション用 keyframes を JS で追加 ──
+const mapStyle = document.createElement('style');
+mapStyle.textContent = `
+  @keyframes map-now-glow {
+    0%,100% { fill:rgba(88,166,255,0.25); stroke:#58a6ff; stroke-width:4; }
+    50%      { fill:rgba(88,166,255,0.55); stroke:#58a6ff; stroke-width:6; }
+  }
+  @keyframes map-nxt-glow {
+    0%,100% { fill:rgba(240,180,41,0.2);  stroke:#f0b429; stroke-width:3; }
+    50%      { fill:rgba(240,180,41,0.45); stroke:#f0b429; stroke-width:5; }
+  }
+  @keyframes map-txt-now {
+    0%,100% { fill:#58a6ff; opacity:1; }
+    50%      { fill:#fff;    opacity:0.8; }
+  }
+  @keyframes map-txt-nxt {
+    0%,100% { fill:#f0b429; opacity:1; }
+    50%      { fill:#fff;    opacity:0.8; }
+  }
+  .map-bld-now { animation: map-now-glow 1.2s ease-in-out infinite; }
+  .map-bld-nxt { animation: map-nxt-glow 1.5s ease-in-out infinite; }
+  .map-lbl-now { animation: map-txt-now  1.2s ease-in-out infinite; }
+  .map-lbl-nxt { animation: map-txt-nxt  1.5s ease-in-out infinite; }
+`;
+document.head.appendChild(mapStyle);
+
+// ── マップ更新関数 ──
+function updateMap(nowRoom, nxtRoom) {
+  const nowBld = getRoomBuilding(nowRoom);
+  const nxtBld = getRoomBuilding(nxtRoom);
+  const bldNums = [1,2,3,5,7,8,9,11,12];
+
+  bldNums.forEach(n => {
+    const rect = document.getElementById('bld-'+n);
+    const lbl  = document.getElementById('lbl-'+n);
+    if (!rect || !lbl) return;
+    // リセット
+    rect.className = '';
+    rect.setAttribute('fill','none');
+    rect.setAttribute('stroke','none');
+    lbl.className = '';
+    lbl.setAttribute('fill','none');
+
+    if (nowBld === n) {
+      rect.className = 'map-bld-now';
+      lbl.className  = 'map-lbl-now';
+    } else if (nxtBld === n && nxtBld !== nowBld) {
+      rect.className = 'map-bld-nxt';
+      lbl.className  = 'map-lbl-nxt';
+    }
+  });
+
+  // 凡例
+  document.getElementById('legend-now').style.display  = nowBld ? 'inline' : 'none';
+  document.getElementById('legend-nxt').style.display  = (nxtBld && nxtBld !== nowBld) ? 'inline' : 'none';
+  document.getElementById('legend-none').style.display = (!nowBld && !nxtBld) ? 'inline' : 'none';
+}
+
+// ── updateInfoCard をフック ──
+const _origUpdateInfoCard = updateInfoCard;
+window.updateInfoCard = function(act, nxt) {
+  _origUpdateInfoCard(act, nxt);
+  const nowRoom = act ? act.cell.room : null;
+  const nxtRoom = nxt ? nxt.cell.room : null;
+  updateMap(nowRoom, nxtRoom);
+};
+</script>
+</body>
