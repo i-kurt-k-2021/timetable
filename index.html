@@ -8,12 +8,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
-body{background:#0d1117;color:#e6edf3;font-family:'Noto Sans JP',sans-serif;min-height:100vh;padding:6px 4px 20px}
+body{background:#0d1117;color:#e6edf3;font-family:'Noto Sans JP',sans-serif;min-height:100vh;padding:6px 4px 16px}
 
-header{display:flex;flex-direction:column;align-items:center;gap:5px;margin-bottom:6px}
+header{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:5px}
 header h1{font-size:0.85rem;font-weight:900;letter-spacing:0.1em;color:#e6edf3}
 
-#now-banner{display:flex;align-items:center;justify-content:center;gap:6px;padding:5px 10px;border-radius:10px;background:linear-gradient(135deg,#0d2137,#0a1628);border:1.5px solid rgba(88,166,255,0.5);animation:bglow 2s ease-in-out infinite;width:100%;flex-wrap:wrap}
+#now-banner{display:flex;align-items:center;justify-content:center;gap:6px;padding:4px 10px;border-radius:10px;background:linear-gradient(135deg,#0d2137,#0a1628);border:1.5px solid rgba(88,166,255,0.5);animation:bglow 2s ease-in-out infinite;width:100%;flex-wrap:wrap}
 @keyframes bglow{0%,100%{box-shadow:0 0 12px rgba(88,166,255,0.2);border-color:rgba(88,166,255,0.45)}50%{box-shadow:0 0 28px rgba(88,166,255,0.55);border-color:rgba(88,166,255,1)}}
 .bdot{width:6px;height:6px;border-radius:50%;background:#58a6ff;animation:db 1s ease-in-out infinite;flex-shrink:0}
 @keyframes db{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.1;transform:scale(0.4)}}
@@ -26,79 +26,90 @@ header h1{font-size:0.85rem;font-weight:900;letter-spacing:0.1em;color:#e6edf3}
 .tbl-wrap{border-radius:8px;border:1px solid #3a4250;box-shadow:0 0 24px rgba(0,0,0,0.5);overflow:hidden}
 table{border-collapse:collapse;width:100%;table-layout:fixed}
 
-th {
-    background: #1c2128;
-    color: #ffffff; /* 青色(#58a6ff)から白(#ffffff)に変更 */
-    font-size: 0.88rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-align: center;
-    padding: 4px 2px;
-    border: 1px solid #3a4250;
-    height: 26px;
-    white-space: nowrap;
-}
+th{background:#1c2128;color:#ffffff;font-size:0.88rem;font-weight:700;letter-spacing:0.1em;text-align:center;padding:3px 2px;border:1px solid #3a4250;height:24px;white-space:nowrap}
+th.today-col{background:#ffffff!important;color:#1060d0!important;font-weight:900;animation:none!important}
 
-/* --- 本日の曜日のスタイル（白背景・青文字） --- */
-th.today-col {
-    background: #ffffff !important; /* 背景を白に */
-    color: #1060d0 !important;      /* 文字を濃い青に */
-    font-weight: 900;
-    animation: none !important;     /* 以前のアニメーションを無効化 */
-}
-@keyframes chg{0%,100%{background:rgba(88,166,255,0.18)}50%{background:rgba(88,166,255,0.35)}}
-
-td.pc{background:#161b22;font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:#8b949e;text-align:center;border:1px solid #3a4250;padding:0;height:38px;font-weight:700;vertical-align:middle}
-td.tc{background:#1c2128;font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:#c0c8d4;text-align:center;border:1px solid #3a4250;padding:1px;height:38px;line-height:1.3;white-space:nowrap;font-weight:700;vertical-align:middle}
+td.pc{background:#161b22;font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#8b949e;text-align:center;border:1px solid #3a4250;padding:0;height:30px;font-weight:700;vertical-align:middle}
+td.tc{background:#1c2128;font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#c0c8d4;text-align:center;border:1px solid #3a4250;padding:1px;height:30px;line-height:1.2;white-space:nowrap;font-weight:700;vertical-align:middle}
 .next-row{color:rgba(255,255,255,0.85)!important;font-weight:700!important}
 
-td.cc{position:relative;text-align:center;vertical-align:middle;border:1px solid #3a4250;padding:2px;height:38px;overflow:hidden}
+td.cc{position:relative;text-align:center;vertical-align:middle;border:1px solid #3a4250;padding:2px;height:30px;overflow:hidden}
 td.cc.empty{background:#252d38}
+.cn{font-weight:700;line-height:1.15;font-size:0.55rem;color:#000!important;display:block}
+.cr{font-size:0.52rem;margin-top:1px;color:#fff!important;font-weight:700;display:block}
 
-.cn{font-weight:700;line-height:1.2;font-size:0.58rem;color:#111;display:block}
-.cr{font-size:0.58rem;margin-top:1px;font-family:'Noto Sans JP',sans-serif;color:#fff;font-weight:700;display:block}
-
-/* 画像の色に合わせたカラー設定 */
-.c-green  { background: #92d050; } /* 物理学基礎 */
-.c-cyan   { background: #00b0f0; } /* 視覚造形 / 数理データ */
-.c-orange { background: #ffc000; } /* ドイツ語 / 知能メディア体験 */
-.c-purple { background: #cc99ff; } /* 英語表現 / 英語理解 */
-.c-pink   { background: #ff99cc; } /* 哲学 / 日本語表現 */
-.c-lblue  { background: #9bc2e6; } /* 数学基礎 */
-.c-yellow { background: #ffc000; } /* ドイツ語(オレンジと統合) */
-.c-club   { background: #ffffff; } /* 部活 */
-
-/* 文字色の微調整（背景が明るいので文字を黒に） */
-.cn { color: #000 !important; } /* 授業名は黒（!importantで固定） */
-.cr { color: #fff !important; } /* 教室名は白（!importantで固定） */
+.c-green{background:#92d050}.c-cyan{background:#00b0f0}.c-orange{background:#ffc000}
+.c-purple{background:#cc99ff}.c-pink{background:#ff99cc}.c-lblue{background:#9bc2e6}
+.c-yellow{background:#ffc000}.c-club{background:#ffffff}
 
 @keyframes aglow{0%,100%{box-shadow:0 0 0 3px rgba(255,255,255,0.9),0 0 16px 4px rgba(88,166,255,0.7)}50%{box-shadow:0 0 0 3px rgba(255,255,255,0.35),0 0 28px 10px rgba(88,166,255,0.15)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
 td.cc.active{animation:aglow 1.2s ease-in-out infinite;filter:brightness(1.3) saturate(1.4);z-index:2}
 td.cc.active .cn{animation:blink 1.2s ease-in-out infinite}
-td.cc.active::after{content:'▶NOW';position:absolute;top:2px;right:2px;font-family:'Share Tech Mono',monospace;font-size:0.4rem;color:#fff;background:rgba(0,0,0,0.6);padding:1px 2px;border-radius:2px;animation:blink 1.2s ease-in-out infinite}
-
+td.cc.active::after{content:'▶NOW';position:absolute;top:1px;right:1px;font-family:'Share Tech Mono',monospace;font-size:0.38rem;color:#fff;background:rgba(0,0,0,0.6);padding:1px 2px;border-radius:2px;animation:blink 1.2s ease-in-out infinite}
 td.cc.next-class{filter:brightness(1.15) saturate(1.2);z-index:1;outline:3px solid #fff;outline-offset:-3px}
-td.cc.next-class::after{content:'NEXT';position:absolute;top:2px;right:2px;font-family:'Share Tech Mono',monospace;font-size:0.4rem;color:#fff;background:rgba(0,0,0,0.6);padding:1px 2px;border-radius:2px}
-
+td.cc.next-class::after{content:'NEXT';position:absolute;top:1px;right:1px;font-family:'Share Tech Mono',monospace;font-size:0.38rem;color:#fff;background:rgba(0,0,0,0.6);padding:1px 2px;border-radius:2px}
 td.cc.past::before{content:'';position:absolute;inset:0;background:rgba(13,17,23,0.72);z-index:1;pointer-events:none}
-td.cc.past .cn{position:relative;z-index:2;color:#d1d5da !important}
-td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0 !important}
+td.cc.past .cn{position:relative;z-index:2;color:#d1d5da!important}
+td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
 
-#info-card{margin-top:8px;border-radius:10px;overflow:hidden;border:1px solid #3a4250;display:none}
+#info-card{margin-top:6px;border-radius:10px;overflow:hidden;border:1px solid #3a4250;display:none}
 .irow{display:flex;align-items:stretch;border-bottom:1px solid #3a4250}
 .irow:last-child{border-bottom:none}
 .ibadge{display:flex;align-items:center;justify-content:center;padding:0 10px;font-size:0.58rem;font-weight:900;letter-spacing:0.08em;white-space:nowrap;min-width:48px;flex-shrink:0}
 .ibadge.now{background:rgba(88,166,255,0.18);color:#58a6ff;border-right:2px solid #58a6ff}
 .ibadge.nxt{background:#fff;color:#111;border-right:2px solid rgba(255,255,255,0.7);font-size:0.65rem}
-.icont{display:flex;align-items:center;gap:8px;padding:6px 10px;flex:1;background:#161b22}
-.idot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.icont{display:flex;align-items:center;gap:8px;padding:5px 10px;flex:1;background:#161b22}
 .iname{font-weight:700;font-size:0.75rem;flex:1;color:#e6edf3}
-.idet{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#c0c8d4;text-align:right;white-space:nowrap;line-height:1.4}
 .irow.now-info{animation:nri 1.2s ease-in-out infinite}
 @keyframes nri{0%,100%{background:rgba(88,166,255,0.06)}50%{background:transparent}}
 
-footer{text-align:center;margin-top:10px;font-size:0.56rem;color:#3d444d;letter-spacing:0.1em}
+/* ══ マップ ══ */
+#campus-map-section{margin-top:8px;border-radius:8px;border:1px solid #3a4250;overflow:hidden;background:#161b22}
+.map-header{padding:5px 10px;background:#1c2128;border-bottom:1px solid #3a4250;font-size:0.7rem;font-weight:700;color:#58a6ff;letter-spacing:0.1em}
+.map-wrap{position:relative;width:100%;display:block;line-height:0;overflow:hidden}
+.map-wrap img{width:100%;display:block;height:auto;min-height:40vw}
+.map-wrap svg{display:none}
+
+/* ラベルの基本スタイル */
+.bld-label{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:13px;
+  font-weight:900;
+  fill:#333;
+  text-anchor:middle;
+  dominant-baseline:middle;
+  pointer-events:none;
+}
+.bld-bg{
+  fill:rgba(255,255,255,0.75);
+  rx:3;
+}
+
+/* NOW: 青い点滅ラベル枠 */
+@keyframes now-label-glow{
+  0%,100%{fill:rgba(88,166,255,0.95);stroke:#58a6ff;stroke-width:1.5;filter:drop-shadow(0 0 4px #58a6ff)}
+  50%    {fill:rgba(30,100,220,0.85); stroke:#fff;   stroke-width:2;  filter:drop-shadow(0 0 8px #58a6ff)}
+}
+@keyframes now-text-blink{
+  0%,100%{fill:#fff;opacity:1}
+  50%    {fill:#cce4ff;opacity:0.85}
+}
+@keyframes next-label-solid{
+  0%,100%{fill:rgba(255,255,255,0.92);stroke:#fff;stroke-width:1.5}
+  50%    {fill:rgba(220,220,220,0.8); stroke:#ddd;stroke-width:1.5}
+}
+
+.label-now-bg { animation: now-label-glow  1.2s ease-in-out infinite; rx:3; }
+.label-nxt-bg { animation: next-label-solid 1.5s ease-in-out infinite; rx:3; fill:rgba(255,255,255,0.9); stroke:#fff; stroke-width:1.5; }
+.label-now-txt{ animation: now-text-blink   1.2s ease-in-out infinite; font-weight:900!important; }
+.label-nxt-txt{ fill:#111; font-weight:900!important; }
+
+.map-legend{padding:5px 10px;font-size:0.62rem;color:#8b949e;display:flex;gap:12px;flex-wrap:wrap;background:#1c2128;border-top:1px solid #3a4250}
+.leg-now{display:inline-block;width:28px;height:11px;background:rgba(88,166,255,0.9);border-radius:2px;border:1px solid #58a6ff;margin-right:4px;vertical-align:middle}
+.leg-nxt{display:inline-block;width:28px;height:11px;background:rgba(255,255,255,0.9);border-radius:2px;border:1px solid #fff;margin-right:4px;vertical-align:middle}
+
+footer{text-align:center;margin-top:8px;font-size:0.56rem;color:#3d444d;letter-spacing:0.1em}
 </style>
 </head>
 <body>
@@ -117,21 +128,103 @@ footer{text-align:center;margin-top:10px;font-size:0.56rem;color:#3d444d;letter-
 
 <div class="tbl-wrap">
 <table id="main-table">
-<colgroup>
-  <col style="width:22px"><col style="width:44px">
-  <col><col><col><col><col>
-</colgroup>
+<colgroup><col style="width:22px"><col style="width:44px"><col><col><col><col><col></colgroup>
 <thead>
-<tr>
-  <th></th><th>時間</th>
-  <th id="th-1">月</th><th id="th-2">火</th><th id="th-3">水</th><th id="th-4">木</th><th id="th-5">金</th>
-</tr>
+<tr><th></th><th>時間</th><th id="th-1">月</th><th id="th-2">火</th><th id="th-3">水</th><th id="th-4">木</th><th id="th-5">金</th></tr>
 </thead>
 <tbody id="tbody"></tbody>
 </table>
 </div>
 
 <div id="info-card"></div>
+
+<!-- ══ キャンパスマップ ══ -->
+<div id="campus-map-section">
+  <div class="map-header">📍 キャンパスマップ</div>
+  <div class="map-wrap">
+    <img src="map2.jpg" alt="キャンパスマップ" style="width:100%;height:auto;display:block">
+    <!--
+      SVG viewBox = 800×480 (JPG解像度に合わせる)
+      各建物ラベルの座標は map.png の建物名位置から推定
+      bg rect は text より先に描画（z-order）
+    -->
+    <svg viewBox="0 0 800 480" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"></svg>
+      <!-- 建物ごとに <g> でまとめる: bg(rect) + text -->
+
+      <!-- 学生寮 -->
+      <g id="bld-0">
+        <rect id="bg-0"  x="58"  y="148" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-0" x="76"  y="156" class="bld-label">学生寮</text>
+      </g>
+      <!-- 体育館 -->
+      <g id="bld-gym">
+        <rect id="bg-gym"  x="152" y="216" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-gym" x="170" y="224" class="bld-label">体育館</text>
+      </g>
+      <!-- 9号館 -->
+      <g id="bld-9">
+        <rect id="bg-9"  x="264" y="200" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-9" x="282" y="208" class="bld-label">9号館</text>
+      </g>
+      <!-- 7号館 -->
+      <g id="bld-7">
+        <rect id="bg-7"  x="480" y="148" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-7" x="498" y="156" class="bld-label">7号館</text>
+      </g>
+      <!-- 8号館 -->
+      <g id="bld-8">
+        <rect id="bg-8"  x="570" y="190" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-8" x="588" y="198" class="bld-label">8号館</text>
+      </g>
+      <!-- 食堂棟 -->
+      <g id="bld-shk">
+        <rect id="bg-shk"  x="700" y="232" width="42" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-shk" x="721" y="240" class="bld-label">食堂棟</text>
+      </g>
+      <!-- 図書館 -->
+      <g id="bld-lib">
+        <rect id="bg-lib"  x="240" y="256" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-lib" x="258" y="264" class="bld-label">図書館</text>
+      </g>
+      <!-- 2号館 -->
+      <g id="bld-2">
+        <rect id="bg-2"  x="330" y="272" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-2" x="348" y="280" class="bld-label">2号館</text>
+      </g>
+      <!-- 5号館 -->
+      <g id="bld-5">
+        <rect id="bg-5"  x="436" y="248" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-5" x="454" y="256" class="bld-label">5号館</text>
+      </g>
+      <!-- 3号館 -->
+      <g id="bld-3">
+        <rect id="bg-3"  x="298" y="318" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-3" x="316" y="326" class="bld-label">3号館</text>
+      </g>
+      <!-- 1号館 -->
+      <g id="bld-1">
+        <rect id="bg-1"  x="386" y="338" width="36" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-1" x="404" y="346" class="bld-label">1号館</text>
+      </g>
+      <!-- 11号館 -->
+      <g id="bld-11">
+        <rect id="bg-11"  x="148" y="376" width="42" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-11" x="169" y="384" class="bld-label">11号館</text>
+      </g>
+      <!-- 12号館 -->
+      <g id="bld-12">
+        <rect id="bg-12"  x="530" y="356" width="42" height="13" rx="2" fill="rgba(255,255,255,0.75)" stroke="none"/>
+        <text id="txt-12" x="551" y="364" class="bld-label">12号館</text>
+      </g>
+    </svg>
+  </div>
+  <div class="map-legend">
+    <span id="legend-now" style="display:none"><span class="leg-now"></span>現在の授業（NOW）</span>
+    <span id="legend-nxt" style="display:none"><span class="leg-nxt"></span>次の授業（NEXT）</span>
+    <span id="legend-none">授業時間外</span>
+  </div>
+</div>
+
 <footer>リアルタイム時間割 — 毎秒更新</footer>
 
 <script>
@@ -142,46 +235,27 @@ const P={
 const TL={1:'09:00',2:'10:00',3:'11:00',4:'12:00',5:'13:00',6:'14:00',7:'15:00',8:'16:00',9:'17:00',10:'18:00'};
 
 const SCH={
-  1:{
-    1:{name:'物理学基礎',  room:'8108',              color:'c-green', rs:3},
-    5:{name:'ドイツ語',    room:'5301',              color:'c-yellow',rs:2},
-    7:{name:'物理学基礎 b',room:'8108',              color:'c-green', rs:1}
-  },
-  2:{
-    1:{name:'視覚造形基礎',room:'12号5階\n各共用製図',color:'c-cyan',  rs:4},
-    6:{name:'英語理解',    room:'5203',              color:'c-purple',rs:2},
-    8:{name:'数学基礎 c',  room:'8106',              color:'c-lblue', rs:1},
-    9:{name:'部活',        room:'',                  color:'c-club',  rs:2}
-  },
-  3:{
-    1:{name:'知能メディア\n体験演習',room:'12号3階\n教室兼実習',color:'c-orange',rs:4},
-    7:{name:'日本語表現法',room:'5303',              color:'c-pink',  rs:2}
-  },
-  4:{
-    2:{name:'英語表現',    room:'5207',              color:'c-purple',rs:2},
-    5:{name:'哲学',        room:'5201',              color:'c-pink',  rs:2}
-  },
-  5:{
-    1:{name:'数学基礎',    room:'8106',              color:'c-lblue', rs:3},
-    5:{name:'初年次教育',  room:'3212',              color:'c-orange',rs:2},
-    7:{name:'数理・データ\nサイエンスAI',room:'3212',color:'c-cyan',  rs:2},
-    9:{name:'部活',        room:'',                  color:'c-club',  rs:2}
-  }
+  1:{1:{name:'物理学基礎',  room:'8108',              color:'c-green', rs:3},
+     5:{name:'ドイツ語',    room:'5301',              color:'c-yellow',rs:2},
+     7:{name:'物理学基礎 b',room:'8108',              color:'c-green', rs:1}},
+  2:{1:{name:'視覚造形基礎',room:'12号5階\n各共用製図',color:'c-cyan',  rs:4},
+     6:{name:'英語理解',    room:'5203',              color:'c-purple',rs:2},
+     8:{name:'数学基礎 c',  room:'8106',              color:'c-lblue', rs:1},
+     9:{name:'部活',        room:'',                  color:'c-club',  rs:2}},
+  3:{1:{name:'知能メディア\n体験演習',room:'12号3階\n教室兼実習',color:'c-orange',rs:4},
+     7:{name:'日本語表現法',room:'5303',              color:'c-pink',  rs:2}},
+  4:{2:{name:'英語表現',    room:'5207',              color:'c-purple',rs:2},
+     5:{name:'哲学',        room:'5201',              color:'c-pink',  rs:2}},
+  5:{1:{name:'数学基礎',    room:'8106',              color:'c-lblue', rs:3},
+     5:{name:'初年次教育',  room:'3212',              color:'c-orange',rs:2},
+     7:{name:'数理・データ\nサイエンスAI',room:'3212',color:'c-cyan',  rs:2},
+     9:{name:'部活',        room:'',                  color:'c-club',  rs:2}}
 };
 
-const COLOR_HEX = {
-  'c-green':  '#92d050',
-  'c-cyan':   '#00b0f0',
-  'c-orange': '#ffc000',
-  'c-purple': '#cc99ff',
-  'c-pink':   '#ff99cc',
-  'c-lblue':  '#9bc2e6',
-  'c-yellow': '#ffc000',
-  'c-club':   '#ffffff'
-};
 const DAYS=[1,2,3,4,5];
 const WFULL=['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
 const PC=10;
+const PC_BG='#161b22',TC_BG='#1c2128',PC_C='#8b949e',TC_C='#c0c8d4';
 
 function toMin(h,m){return h*60+m}
 function fmt2(n){return String(n).padStart(2,'0')}
@@ -191,8 +265,7 @@ function getNext(di,nm){const d=SCH[di]||{};let best=null;for(const k in d){cons
 function isPast(ep,nm){const[,,eh,em]=P[ep];return nm>toMin(eh,em)}
 
 function buildTable(){
-  const tbody=document.getElementById('tbody');
-  tbody.innerHTML='';
+  const tbody=document.getElementById('tbody');tbody.innerHTML='';
   const skip={1:{},2:{},3:{},4:{},5:{}};
   for(let p=1;p<=PC;p++){
     const tr=document.createElement('tr');
@@ -208,66 +281,80 @@ function buildTable(){
         td.classList.add(cell.color);
         const ne=document.createElement('span');ne.className='cn';ne.innerHTML=cell.name.replace(/\n/g,'<br>');td.appendChild(ne);
         if(cell.room){const re=document.createElement('span');re.className='cr';re.innerHTML=cell.room.replace(/\n/g,'<br>');td.appendChild(re);}
-      } else {
-        td.classList.add('empty');td.dataset.ep=p;
-      }
+      } else {td.classList.add('empty');td.dataset.ep=p;}
       tr.appendChild(td);
     });
     tbody.appendChild(tr);
   }
 }
 
-// ── now-row: JSで直接backgroundColor/colorを書き込む ──
-const PC_DEFAULT_BG='#161b22';
-const TC_DEFAULT_BG='#1c2128';
-const PC_DEFAULT_COLOR='#8b949e';
-const TC_DEFAULT_COLOR='#c0c8d4';
-
-function applyNowRow(p, on){
-  const pe=document.getElementById('fp-'+p);
-  const te=document.getElementById('ft-'+p);
+function applyNowRow(p,on){
+  const pe=document.getElementById('fp-'+p),te=document.getElementById('ft-'+p);
   if(!pe||!te)return;
-  pe.style.backgroundColor = on ? '#ffffff' : PC_DEFAULT_BG;
-  pe.style.color            = on ? '#1060d0' : PC_DEFAULT_COLOR;
-  pe.style.fontWeight       = on ? '900' : '700';
-  te.style.backgroundColor  = on ? '#ffffff' : TC_DEFAULT_BG;
-  te.style.color             = on ? '#1060d0' : TC_DEFAULT_COLOR;
-  te.style.fontWeight        = on ? '900' : '700';
+  pe.style.backgroundColor=on?'#ffffff':PC_BG;pe.style.color=on?'#1060d0':PC_C;pe.style.fontWeight=on?'900':'700';
+  te.style.backgroundColor=on?'#ffffff':TC_BG;te.style.color=on?'#1060d0':TC_C;te.style.fontWeight=on?'900':'700';
+}
+
+// 教室番号 → 号館ID
+function getRoomBldId(room){
+  if(!room)return null;
+  if(/12[号館]|12号/.test(room))return '12';
+  const m=room.match(/^(\d{1,2})\d{2,3}/);
+  return m?m[1]:null;
+}
+
+// マップラベル更新
+const ALL_BLDS=['0','gym','1','2','3','5','7','8','9','11','12','lib','shk'];
+function updateMap(nowRoom,nxtRoom){
+  const nowId=getRoomBldId(nowRoom);
+  const nxtId=getRoomBldId(nxtRoom);
+  ALL_BLDS.forEach(id=>{
+    const bg=document.getElementById('bg-'+id);
+    const txt=document.getElementById('txt-'+id);
+    if(!bg||!txt)return;
+    // リセット
+    bg.removeAttribute('class');bg.setAttribute('fill','rgba(255,255,255,0.75)');bg.setAttribute('stroke','none');bg.setAttribute('stroke-width','0');
+    txt.removeAttribute('class');txt.setAttribute('class','bld-label');
+    if(nowId&&nowId===id){
+      bg.setAttribute('class','label-now-bg');
+      txt.setAttribute('class','bld-label label-now-txt');
+    } else if(nxtId&&nxtId===id&&nxtId!==nowId){
+      bg.setAttribute('class','label-nxt-bg');
+      txt.setAttribute('class','bld-label label-nxt-txt');
+    }
+  });
+  document.getElementById('legend-now').style.display=nowId?'inline':'none';
+  document.getElementById('legend-nxt').style.display=(nxtId&&nxtId!==nowId)?'inline':'none';
+  document.getElementById('legend-none').style.display=(!nowId&&!nxtId)?'inline':'none';
 }
 
 let prevP=null;
 
 function update(){
   const now=new Date();
-  const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
-  const dow=now.getDay(),nm=toMin(h,m);
+  const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds(),dow=now.getDay();
+  const nm=toMin(h,m);
   const todayDi=DAYS.includes(dow)?dow:null;
 
   document.getElementById('clock').textContent=fmt2(h)+':'+fmt2(m)+':'+fmt2(s);
   document.getElementById('banner-day').textContent=WFULL[dow];
-
   const cp=getCurP(nm);
   document.getElementById('banner-period').textContent=cp
     ?(()=>{const[sh,sm,eh,em]=P[cp];return'第'+cp+'限 '+fmt2(sh)+':'+fmt2(sm)+'〜'+fmt2(eh)+':'+fmt2(em);})()
     :'授業時間外';
 
   DAYS.forEach(d=>{const th=document.getElementById('th-'+d);if(th)th.classList.toggle('today-col',d===todayDi);});
-
-  // 前の now-row をリセット
   if(prevP!==null){applyNowRow(prevP,false);prevP=null;}
-  // next-row リセット
   document.querySelectorAll('.next-row').forEach(el=>el.classList.remove('next-row'));
 
-  let activeCellData=null,nextData=null;
+  let act=null,nxt=null;
   if(todayDi){
-    if(cp!==null){const f=getCellFor(todayDi,cp);if(f)activeCellData=f;}
-    nextData=getNext(todayDi,nm);
+    if(cp!==null){const f=getCellFor(todayDi,cp);if(f)act=f;}
+    nxt=getNext(todayDi,nm);
     if(cp){applyNowRow(cp,true);prevP=cp;}
-    if(nextData){
-      const pe=document.getElementById('fp-'+nextData.sp);
-      const te=document.getElementById('ft-'+nextData.sp);
-      if(pe)pe.classList.add('next-row');
-      if(te)te.classList.add('next-row');
+    if(nxt){
+      const pe=document.getElementById('fp-'+nxt.sp),te=document.getElementById('ft-'+nxt.sp);
+      if(pe)pe.classList.add('next-row');if(te)te.classList.add('next-row');
     }
   }
 
@@ -277,170 +364,29 @@ function update(){
     const di=parseInt(el.dataset.day);if(di!==todayDi)return;
     const sp=parseInt(el.dataset.p),ep=parseInt(el.dataset.ep);
     if(cp!==null&&cp>=sp&&cp<=ep)el.classList.add('active');
-    else if(nextData&&sp===nextData.sp)el.classList.add('next-class');
+    else if(nxt&&sp===nxt.sp)el.classList.add('next-class');
     else if(isPast(ep,nm))el.classList.add('past');
   });
 
-  updateInfoCard(activeCellData,nextData);
+  updateInfoCard(act,nxt);
+  updateMap(act?act.cell.room:null, nxt?nxt.cell.room:null);
 }
 
-function updateInfoCard(act, nxt) {
-  const card = document.getElementById('info-card');
-  if (!act && !nxt) {
-    card.style.display = 'none';
-    return;
-  }
-  card.style.display = 'block';
-  card.innerHTML = '';
-
-  const now = new Date();
-  const todayDi = now.getDay();
-
-  function row(label, cls, cell, sp, day) {
-    const dayName = WFULL[day]; 
-    const d = document.createElement('div');
-    d.className = 'irow' + (cls ? ' ' + cls : '');
-
-    d.innerHTML = `
-      <div class="ibadge ${label === '現在' ? 'now' : 'nxt'}">${label}</div>
-      <div class="icont">
-        <div class="iname" style="font-size:0.8rem;">
-          ${dayName} 第${sp}限：${cell.name.replace(/\n/g, ' ')} 
-          <span style="color:#8b949e; font-size:0.7rem; margin-left:8px;">
-            ${cell.room ? '[' + cell.room.replace(/\n/g, ' ') + ']' : ''}
-          </span>
-        </div>
-      </div>`;
+function updateInfoCard(act,nxt){
+  const card=document.getElementById('info-card');
+  if(!act&&!nxt){card.style.display='none';return;}
+  card.style.display='block';card.innerHTML='';
+  const dow=new Date().getDay();
+  function makeRow(label,cls,cell,sp){
+    const d=document.createElement('div');d.className='irow'+(cls?' '+cls:'');
+    d.innerHTML=`<div class="ibadge ${label==='現在'?'now':'nxt'}">${label}</div><div class="icont"><div class="iname">${WFULL[dow]} 第${sp}限：${cell.name.replace(/\n/g,' ')} <span style="color:#8b949e;font-size:0.68rem;">${cell.room?'['+cell.room.replace(/\n/g,' ')+']':''}</span></div></div>`;
     return d;
   }
-
-  if (act) card.appendChild(row('現在', 'now-info', act.cell, act.sp, todayDi));
-  if (nxt) card.appendChild(row('次回', '', nxt.cell, nxt.sp, todayDi));
-} 
-
-buildTable();
-update();
-setInterval(update, 1000);
-</script>
-
-</html>
-
-<!-- ══ キャンパスマップ ══ -->
-<div id="campus-map-section" style="margin-top:12px;border-radius:8px;border:1px solid #3a4250;overflow:hidden;background:#161b22;">
-  <div style="padding:6px 10px;background:#1c2128;border-bottom:1px solid #3a4250;font-size:0.7rem;font-weight:700;color:#58a6ff;letter-spacing:0.1em;">
-    📍 キャンパスマップ
-  </div>
-  <div style="position:relative;width:100%;user-select:none;">
-    <img id="campus-img" src="map.png" style="width:100%;display:block;" alt="キャンパスマップ">
-    <svg id="campus-svg" viewBox="0 0 1320 870" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
-      <!-- 各号館のハイライト領域 (x,y,w,h はマップ画像上の座標) -->
-      <!-- 1号館 --> <rect id="bld-1"  x="588" y="480" width="90"  height="90"  rx="6" fill="none" stroke="none"/>
-      <!-- 2号館 --> <rect id="bld-2"  x="530" y="390" width="90"  height="90"  rx="6" fill="none" stroke="none"/>
-      <!-- 3号館 --> <rect id="bld-3"  x="450" y="430" width="90"  height="80"  rx="6" fill="none" stroke="none"/>
-      <!-- 5号館 --> <rect id="bld-5"  x="620" y="340" width="100" height="90"  rx="6" fill="none" stroke="none"/>
-      <!-- 7号館 --> <rect id="bld-7"  x="760" y="190" width="100" height="80"  rx="6" fill="none" stroke="none"/>
-      <!-- 8号館 --> <rect id="bld-8"  x="840" y="250" width="130" height="100" rx="6" fill="none" stroke="none"/>
-      <!-- 9号館 --> <rect id="bld-9"  x="460" y="270" width="100" height="90"  rx="6" fill="none" stroke="none"/>
-      <!-- 11号館--> <rect id="bld-11" x="310" y="470" width="110" height="90"  rx="6" fill="none" stroke="none"/>
-      <!-- 12号館--> <rect id="bld-12" x="720" y="440" width="130" height="160" rx="6" fill="none" stroke="none"/>
-      <!-- ラベル -->
-      <text id="lbl-1"  x="633" y="535" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">1号館</text>
-      <text id="lbl-2"  x="575" y="445" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">2号館</text>
-      <text id="lbl-3"  x="495" y="480" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">3号館</text>
-      <text id="lbl-5"  x="670" y="395" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">5号館</text>
-      <text id="lbl-7"  x="810" y="240" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">7号館</text>
-      <text id="lbl-8"  x="905" y="310" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">8号館</text>
-      <text id="lbl-9"  x="510" y="320" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">9号館</text>
-      <text id="lbl-11" x="365" y="520" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">11号館</text>
-      <text id="lbl-12" x="785" y="530" text-anchor="middle" font-size="18" font-weight="900" fill="none" font-family="sans-serif">12号館</text>
-    </svg>
-  </div>
-  <!-- 凡例 -->
-  <div id="map-legend" style="padding:6px 10px;font-size:0.65rem;color:#8b949e;display:flex;gap:12px;flex-wrap:wrap;background:#1c2128;border-top:1px solid #3a4250;">
-    <span id="legend-now" style="display:none"><span style="display:inline-block;width:10px;height:10px;background:#58a6ff;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>現在の授業</span>
-    <span id="legend-nxt" style="display:none"><span style="display:inline-block;width:10px;height:10px;background:#f0b429;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>次の授業</span>
-    <span id="legend-none" style="color:#555;">授業時間外</span>
-  </div>
-</div>
-
-<script>
-// ── 教室番号 → 号館番号 ──
-function getRoomBuilding(room) {
-  if (!room) return null;
-  // "12号3階" や "12号5階" → 12
-  const m12 = room.match(/12[号]/);
-  if (m12) return 12;
-  // "8108" → 8, "5207" → 5 など（先頭1〜2桁）
-  const m4 = room.match(/^(\d{1,2})\d{2,3}/);
-  if (m4) return parseInt(m4[1]);
-  return null;
+  if(act)card.appendChild(makeRow('現在','now-info',act.cell,act.sp));
+  if(nxt)card.appendChild(makeRow('次回','',nxt.cell,nxt.sp));
 }
 
-// ── アニメーション用 keyframes を JS で追加 ──
-const mapStyle = document.createElement('style');
-mapStyle.textContent = `
-  @keyframes map-now-glow {
-    0%,100% { fill:rgba(88,166,255,0.25); stroke:#58a6ff; stroke-width:4; }
-    50%      { fill:rgba(88,166,255,0.55); stroke:#58a6ff; stroke-width:6; }
-  }
-  @keyframes map-nxt-glow {
-    0%,100% { fill:rgba(240,180,41,0.2);  stroke:#f0b429; stroke-width:3; }
-    50%      { fill:rgba(240,180,41,0.45); stroke:#f0b429; stroke-width:5; }
-  }
-  @keyframes map-txt-now {
-    0%,100% { fill:#58a6ff; opacity:1; }
-    50%      { fill:#fff;    opacity:0.8; }
-  }
-  @keyframes map-txt-nxt {
-    0%,100% { fill:#f0b429; opacity:1; }
-    50%      { fill:#fff;    opacity:0.8; }
-  }
-  .map-bld-now { animation: map-now-glow 1.2s ease-in-out infinite; }
-  .map-bld-nxt { animation: map-nxt-glow 1.5s ease-in-out infinite; }
-  .map-lbl-now { animation: map-txt-now  1.2s ease-in-out infinite; }
-  .map-lbl-nxt { animation: map-txt-nxt  1.5s ease-in-out infinite; }
-`;
-document.head.appendChild(mapStyle);
-
-// ── マップ更新関数 ──
-function updateMap(nowRoom, nxtRoom) {
-  const nowBld = getRoomBuilding(nowRoom);
-  const nxtBld = getRoomBuilding(nxtRoom);
-  const bldNums = [1,2,3,5,7,8,9,11,12];
-
-  bldNums.forEach(n => {
-    const rect = document.getElementById('bld-'+n);
-    const lbl  = document.getElementById('lbl-'+n);
-    if (!rect || !lbl) return;
-    // リセット
-    rect.className = '';
-    rect.setAttribute('fill','none');
-    rect.setAttribute('stroke','none');
-    lbl.className = '';
-    lbl.setAttribute('fill','none');
-
-    if (nowBld === n) {
-      rect.className = 'map-bld-now';
-      lbl.className  = 'map-lbl-now';
-    } else if (nxtBld === n && nxtBld !== nowBld) {
-      rect.className = 'map-bld-nxt';
-      lbl.className  = 'map-lbl-nxt';
-    }
-  });
-
-  // 凡例
-  document.getElementById('legend-now').style.display  = nowBld ? 'inline' : 'none';
-  document.getElementById('legend-nxt').style.display  = (nxtBld && nxtBld !== nowBld) ? 'inline' : 'none';
-  document.getElementById('legend-none').style.display = (!nowBld && !nxtBld) ? 'inline' : 'none';
-}
-
-// ── updateInfoCard をフック ──
-const _origUpdateInfoCard = updateInfoCard;
-window.updateInfoCard = function(act, nxt) {
-  _origUpdateInfoCard(act, nxt);
-  const nowRoom = act ? act.cell.room : null;
-  const nxtRoom = nxt ? nxt.cell.room : null;
-  updateMap(nowRoom, nxtRoom);
-};
+buildTable();update();setInterval(update,1000);
 </script>
 </body>
+</html>
