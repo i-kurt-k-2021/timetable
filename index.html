@@ -42,12 +42,12 @@ td.cc.empty{background:#252d38}
 .c-purple{background:#cc99ff}.c-pink{background:#ff99cc}.c-lblue{background:#9bc2e6}
 .c-yellow{background:#ffc000}.c-club{background:#ffffff}
 
-@keyframes aglow{0%,100%{box-shadow:0 0 0 3px #000000,0 0 16px 4px rgba(0,0,0,0.7)}50%{box-shadow:0 0 0 3px rgba(0,0,0,0.4),0 0 28px 10px rgba(0,0,0,0.15)}}
+@keyframes aglow{0%,100%{box-shadow:0 0 0 3px #ffffff,0 0 16px 4px rgba(255,255,255,0.7)}50%{box-shadow:0 0 0 3px rgba(255,255,255,0.2),0 0 28px 10px rgba(255,255,255,0.05)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
 td.cc.active{animation:aglow 1.2s ease-in-out infinite;filter:brightness(1.3) saturate(1.4);z-index:2}
 td.cc.active .cn{animation:blink 1.2s ease-in-out infinite}
 td.cc.active::after{content:'▶NOW';position:absolute;top:1px;right:1px;font-family:'Share Tech Mono',monospace;font-size:0.38rem;color:#fff;background:#000000;padding:1px 2px;border-radius:2px;animation:blink 1.2s ease-in-out infinite}
-td.cc.next-class{filter:brightness(1.15) saturate(1.2);z-index:1;outline:3px solid #000000;outline-offset:-3px}
+td.cc.next-class{filter:brightness(1.15) saturate(1.2);z-index:1;outline:3px solid #ffffff;outline-offset:-3px}
 td.cc.next-class::after{content:'NEXT';position:absolute;top:1px;right:1px;font-family:'Share Tech Mono',monospace;font-size:0.38rem;color:#fff;background:#000000;padding:1px 2px;border-radius:2px}
 td.cc.past::before{content:'';position:absolute;inset:0;background:rgba(13,17,23,0.72);z-index:1;pointer-events:none}
 td.cc.past .cn{position:relative;z-index:2;color:#d1d5da!important}
@@ -74,7 +74,7 @@ td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
 /* ラベルの基本スタイル */
 .bld-label{
   font-family:'Noto Sans JP',sans-serif;
-  font-size:13px;
+  font-size:15px;
   font-weight:900;
   fill:#333;
   text-anchor:middle;
@@ -88,12 +88,12 @@ td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
 
 /* NOW: 黒背景で点滅 */
 @keyframes now-label-glow{
-  0%,100%{fill:rgba(0,0,0,0.95);stroke:#000000;stroke-width:2;filter:drop-shadow(0 0 4px #000000)}
-  50%    {fill:rgba(0,0,0,0.5); stroke:#555;   stroke-width:2.5;filter:drop-shadow(0 0 10px #000000)}
+  0%,100%{fill:rgba(0,0,0,0.95);stroke:#ffffff;stroke-width:2;filter:drop-shadow(0 0 6px #000000)}
+  50%    {fill:rgba(0,0,0,0.2); stroke:#ffffff;stroke-width:2.5;filter:drop-shadow(0 0 12px #000000)}
 }
 @keyframes now-text-blink{
-  0%,100%{fill:#fff;opacity:1}
-  50%    {fill:#cccccc;opacity:0.8}
+  0%,100%{fill:#ffffff;opacity:1;font-size:16px}
+  50%    {fill:#cccccc;opacity:0.8;font-size:16px}
 }
 /* NEXT: 黒背景太枠 */
 @keyframes next-label-glow{
@@ -119,8 +119,8 @@ td.cc.past .cr{position:relative;z-index:2;color:#b1b8c0!important}
 .label-now-txt{animation:now-text-blink  1.2s ease-in-out infinite;font-weight:900!important}
 
 .label-nxt-bg{
-  fill:rgba(0,0,0,0.85)!important;
-  stroke:#000000!important;
+  fill:rgba(0,0,0,0.95)!important;
+  stroke:#ffffff!important;
   stroke-width:5!important;
   filter:drop-shadow(0 0 10px #000000);
   rx:3;
