@@ -291,6 +291,7 @@ function getRoomBldId(room){
   if(g) return g[1];
 
   // 「5203」「8108」等
+  room = room.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0));
   const m = room.match(/^(\d)/);
   if(m) return m[1];
 
