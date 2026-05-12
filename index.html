@@ -308,19 +308,23 @@ function updateMap(nowRoom,nxtRoom){
     const bg=document.getElementById('bg-'+id);
     const txt=document.getElementById('txt-'+id);
     if(!bg||!txt)return;
-    // リセット
+    // リセット：classだけ消す（fill/strokeのインライン属性は設定しない）
     bg.removeAttribute('class');
-    bg.setAttribute('fill','rgba(255,255,255,0.75)');
-    bg.setAttribute('stroke','none');
-    bg.setAttribute('stroke-width','0');
+    bg.removeAttribute('fill');
+    bg.removeAttribute('stroke');
+    bg.removeAttribute('stroke-width');
+    bg.removeAttribute('filter');
     txt.setAttribute('class','bld-label');
-    txt.setAttribute('fill','#333');
     if(nowId===id){
       bg.setAttribute('class','label-now-bg');
       txt.setAttribute('class','bld-label label-now-txt');
     } else if(nxtId===id&&nxtId!==nowId){
       bg.setAttribute('class','label-nxt-bg');
       txt.setAttribute('class','bld-label label-nxt-txt');
+    } else {
+      // 通常ラベル：インラインでデフォルト色を戻す
+      bg.setAttribute('fill','rgba(255,255,255,0.75)');
+      bg.setAttribute('stroke','none');
     }
   });
   document.getElementById('legend-now').style.display=nowId?'inline':'none';
