@@ -284,14 +284,17 @@ function getRoomBldId(room){
   // if(g) return g[1];
 
   // 「3号館」対応
-  const g = room.match(/([0-9０-９]{1,2})号/);
-  if (g) {
-    // マッチした部分を半角に変換してから返す
-    const num = g[1].replace(/[０-９]/g, (ch) => 
+  // 全角数字を半角数字に変換するヘルパー
+  function toHalfWidth(str) {
+    return str.replace(/[０-９]/g, (ch) => 
       String.fromCharCode(ch.charCodeAt(0) - 0xFEE0)
     );
-    return num;
   }
+  
+  // 「3号館」「３号館」どちらにも対応
+  const normalizedRoom = toHalfWidth(room);
+  const g = normalizedRoom.match(/(\d{1,2})号/);
+  if (g) return g[1];
 
   // 「5203」「8108」等
   room = room.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0));
