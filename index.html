@@ -213,7 +213,7 @@ const SCH={
      4:{name:'線形代数',         room:'８２０６',color:'c-lblue',rs:2},
      6:{name:'メディア史',       room:'５１０９',color:'c-orange', rs:2}},
   2:{1:{name:'確率統計',         room:'５２０９',color:'c-lblue',  rs:2},
-     5:{name:'物理学実験',       room:'３号館１階\n第１実験室',color:'c-green',rs:4},
+     5:{name:'物理学実験',       room:'２号館４階\n第１実験室',color:'c-green',rs:4},
      9:{name:'部活',             room:'体育館',  color:'c-club',  rs:2}},
   3:{4:{name:' ﾌﾟﾛｸﾞﾗﾐﾝｸﾞ\n言語基礎',room:'７１０４',color:'c-cyan',rs:2},
      6:{name:'知能ﾒﾃﾞｨｱ\n基礎数学', room:'８１０１',color:'c-lblue',  rs:2}},
@@ -283,7 +283,7 @@ function getRoomBldId(room){
   // const g = room.match(/(\d{1,2})号/);
   // if(g) return g[1];
 
-  // 「3号館」対応
+  // 「２号館」「３号館」対応
   // 全角数字を半角数字に変換するヘルパー
   function toHalfWidth(str) {
     return str.replace(/[０-９]/g, (ch) => 
@@ -291,7 +291,7 @@ function getRoomBldId(room){
     );
   }
   
-  // 「3号館」「３号館」どちらにも対応
+  // 「3号館」「３号館」半角全角対応
   const normalizedRoom = toHalfWidth(room);
   const g = normalizedRoom.match(/(\d{1,2})号/);
   if (g) return g[1];
